@@ -1,6 +1,9 @@
 class Cliente:
+    """
+    Clase que representa un cliente registrado.
+    """
     tipo = "Cliente logeado"
-    contador = 0  
+    contador = 0
 
     def __init__(self, nombre: str, edad: int, email: str):
         Cliente.contador += 1
@@ -16,5 +19,7 @@ class Cliente:
         return f"Nombre: {self.nombre}, Edad: {self.edad}, Email: {self.email}"
 
     def actualizar_email(self, nuevo_email: str):
+        if "@" not in nuevo_email:
+            return "❌ Email inválido"
         self.email = nuevo_email
         return f"Email actualizado a: {self.email}"

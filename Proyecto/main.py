@@ -1,48 +1,45 @@
-from clienteapp import Cliente
+from loginapp import login
+
+def menu_cliente(cliente_obj):
+    while True:
+        print("\nMenú de Cliente:")
+        print("1. Ver datos")
+        print("2. Actualizar email")
+        print("3. Cerrar sesión")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            print(cliente_obj.ver_datos())
+        elif opcion == "2":
+            nuevo_email = input("Nuevo email: ")
+            print(cliente_obj.actualizar_email(nuevo_email))
+        elif opcion == "3":
+            print("Sesión cerrada.")
+            break
+        else:
+            print("❌ Opción inválida.")
 
 def main():
-    
-#Modelo de cliente con datos fijos
+    while True:
+        print("\n=== Menú Principal ===")
+        print("1. Registrarse")
+        print("2. Iniciar sesión")
+        print("3. Salir")
+        opcion = input("Seleccione una opción: ")
 
-    cliente1 = Cliente("Juan", 25, "juan@ejemplo.com")
-    
-    print("✅ Cliente creado:")
-    print(cliente1) 
-    print(cliente1.ver_datos())   
-
-    # Actualización del email
-    print(cliente1.actualizar_email("juan.actualizado@correo.com"))
-
-    # Mostrar datos finales
-    print("📌 Datos finales del cliente:")
-    print(cliente1.ver_datos())
-
-#Modelo de cliente con input
-
-    # print("Registro de clientes")
-    
-    # nombre = input("Ingrese su nombre: ")
-    # edad = int(input("Ingrese su edad: "))
-    # email = input("Ingrese su email: ")
-
-    # cliente = Cliente(nombre, edad, email)
-    # print(cliente)
-
-    # print ("\nCliente registrado correctamente: ")
-    # print(cliente.ver_datos())
-
-    # print("\n Desea acualizar su email? (s/n)")
-    # respuesta = input().lower()
-
-    # if respuesta == "s":
-    #     nuevo_email = input("Ingrese su nuevo email: ")
-    #     print(cliente.actualizar_email(nuevo_email))
-    # else:
-    #     print("No se actualizó su email.")
-
-    # print("\nSus datos ingresados son: ")
-    # print(cliente.ver_datos())
-    # print("\nGracias por registrarse!")
+        if opcion == "1":
+            login.registrar_usuario()
+        elif opcion == "2":
+            usuario = login.login_usuario()
+            if usuario:
+                cliente = login.clientes.get(usuario)
+                if cliente:
+                    menu_cliente(cliente)
+        elif opcion == "3":
+            print("¡Hasta la próxima!")
+            break
+        else:
+            print("❌ Opción inválida.")
 
 if __name__ == "__main__":
     main()
